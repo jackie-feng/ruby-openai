@@ -55,7 +55,8 @@ module OpenAI
       HTTParty.get(
         uri(path: path),
         headers: headers,
-        timeout: request_timeout
+        timeout: request_timeout,
+        **(OpenAI.configuration.http_proxy || {})
       )
     end
 
@@ -64,7 +65,8 @@ module OpenAI
         uri(path: path),
         headers: headers,
         body: parameters&.to_json,
-        timeout: request_timeout
+        timeout: request_timeout,
+        **(OpenAI.configuration.http_proxy || {})
       )
     end
 
@@ -73,7 +75,8 @@ module OpenAI
         uri(path: path),
         headers: headers.merge({ "Content-Type" => "multipart/form-data" }),
         body: parameters,
-        timeout: request_timeout
+        timeout: request_timeout,
+        **(OpenAI.configuration.http_proxy || {})
       )
     end
 
@@ -81,7 +84,8 @@ module OpenAI
       HTTParty.delete(
         uri(path: path),
         headers: headers,
-        timeout: request_timeout
+        timeout: request_timeout,
+        **(OpenAI.configuration.http_proxy || {})
       )
     end
 
